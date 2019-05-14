@@ -8,5 +8,4 @@ Uses core data to store the information. Long press allows to quickly view the e
 - Gestures 
 - URLSession
 
-# Demo
-![](demo.gif)
+
