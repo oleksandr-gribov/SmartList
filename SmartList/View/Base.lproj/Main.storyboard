@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ry4-ne-lq0">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Smart List-->
+        <scene sceneID="psk-8P-NgF">
+            <objects>
+                <viewController id="mAM-87-woE" customClass="MainViewController" customModule="SmartList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Yo-qh-6bx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BBj-Py-puz">
+                                <rect key="frame" x="58.5" y="71" width="258" height="45"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Z92-Xl-okt"/>
+                                    <constraint firstAttribute="width" constant="258" id="eQt-F6-n5B"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Iqp-Lv-puD" appends="YES" id="Gin-QY-eYJ"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPs-B6-sEp">
+                                <rect key="frame" x="329" y="71" width="30" height="45"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="pXy-tt-vsg"/>
+                                </constraints>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addItem:" destination="mAM-87-woE" eventType="touchUpInside" id="QvU-eM-2Ln"/>
+                                    <outletCollection property="gestureRecognizers" destination="Iqp-Lv-puD" appends="YES" id="YyU-0p-RSk"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1v9-by-Uzz">
+                                <rect key="frame" x="0.0" y="117" width="375" height="472"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="XCv-gy-HeX">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XCv-gy-HeX" id="71f-rP-h3M">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="mAM-87-woE" id="t6R-Tb-gxu"/>
+                                    <outlet property="delegate" destination="mAM-87-woE" id="ryg-SP-tAI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XPs-B6-sEp" firstAttribute="leading" secondItem="BBj-Py-puz" secondAttribute="trailing" constant="12.5" id="3Ct-Ze-VPr"/>
+                            <constraint firstItem="1v9-by-Uzz" firstAttribute="trailing" secondItem="d6W-Vh-Nk0" secondAttribute="trailing" id="D5g-5R-rgh"/>
+                            <constraint firstItem="BBj-Py-puz" firstAttribute="centerX" secondItem="3Yo-qh-6bx" secondAttribute="centerX" id="DLM-jf-ZuC"/>
+                            <constraint firstItem="XPs-B6-sEp" firstAttribute="top" secondItem="d6W-Vh-Nk0" secondAttribute="top" constant="7" id="Rlg-ZS-lHG"/>
+                            <constraint firstItem="d6W-Vh-Nk0" firstAttribute="bottom" secondItem="1v9-by-Uzz" secondAttribute="bottom" constant="78" id="Z51-Dr-xJA"/>
+                            <constraint firstItem="1v9-by-Uzz" firstAttribute="top" secondItem="BBj-Py-puz" secondAttribute="bottom" constant="1" id="eJv-SC-Ioz"/>
+                            <constraint firstItem="1v9-by-Uzz" firstAttribute="leading" secondItem="d6W-Vh-Nk0" secondAttribute="leading" id="mfG-3Y-bH1"/>
+                            <constraint firstItem="d6W-Vh-Nk0" firstAttribute="trailing" secondItem="XPs-B6-sEp" secondAttribute="trailing" constant="16" id="vhT-5J-Mlb"/>
+                            <constraint firstItem="BBj-Py-puz" firstAttribute="top" secondItem="d6W-Vh-Nk0" secondAttribute="top" constant="7" id="wAO-yv-qQq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="d6W-Vh-Nk0"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Smart List" id="Mmp-Vk-he7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="GGs-gM-VhR">
+                            <connections>
+                                <action selector="toggleEditingMode:" destination="mAM-87-woE" id="i8S-Hm-T1K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="itemField" destination="BBj-Py-puz" id="Qxq-J5-NAs"/>
+                        <outlet property="tableView" destination="1v9-by-Uzz" id="gN5-GC-lAg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SYc-cU-1Iy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Iqp-Lv-puD">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="mAM-87-woE" id="r76-PB-yYC"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2660" y="-173.16341829085459"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Nll-py-8HB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ry4-ne-lq0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uel-e3-aMK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mAM-87-woE" kind="relationship" relationship="rootViewController" id="iAa-rL-mOy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PS2-ZH-TtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1720.8" y="-173.16341829085459"/>
+        </scene>
+    </scenes>
+</document>
