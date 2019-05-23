@@ -55,6 +55,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DzY-xH-SiH" kind="show" identifier="detailView" id="9yX-Sx-JTV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -77,13 +80,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d6W-Vh-Nk0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Smart List" id="Mmp-Vk-he7">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="GGs-gM-VhR">
-                            <connections>
-                                <action selector="toggleEditingMode:" destination="mAM-87-woE" id="i8S-Hm-T1K"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Smart List" id="Mmp-Vk-he7"/>
                     <connections>
                         <outlet property="itemField" destination="BBj-Py-puz" id="Qxq-J5-NAs"/>
                         <outlet property="tableView" destination="1v9-by-Uzz" id="gN5-GC-lAg"/>
@@ -97,6 +94,58 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2660" y="-173.16341829085459"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="PZh-z0-KzU">
+            <objects>
+                <viewController id="DzY-xH-SiH" customClass="DetailViewController" customModule="SmartList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2AP-aH-Cxf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-Zy-fFf">
+                                <rect key="frame" x="10" y="89" width="355" height="58.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-PV-39w">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-o0-xEf">
+                                        <rect key="frame" x="0.0" y="28.5" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rfd-Zy-fFf" firstAttribute="top" secondItem="eaT-Qc-xfR" secondAttribute="top" constant="25" id="4tG-T0-EIH"/>
+                            <constraint firstItem="rfd-Zy-fFf" firstAttribute="leading" secondItem="eaT-Qc-xfR" secondAttribute="leading" constant="10" id="f4W-c6-hCF"/>
+                            <constraint firstItem="eaT-Qc-xfR" firstAttribute="trailing" secondItem="rfd-Zy-fFf" secondAttribute="trailing" constant="10" id="m2C-cG-ihn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eaT-Qc-xfR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HFY-h0-8KP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SXj-z0-sQO">
+                            <connections>
+                                <segue destination="NRS-4R-pGE" kind="unwind" unwindAction="unwindToMainViewController:" id="U6q-9C-MAw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameLabel" destination="KJp-PV-39w" id="FQd-MX-KKk"/>
+                        <outlet property="nameTextField" destination="27Q-o0-xEf" id="3OQ-vh-PEK"/>
+                        <outlet property="saveButton" destination="SXj-z0-sQO" id="djJ-66-vSI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bzk-2o-hEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NRS-4R-pGE" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3490" y="-173"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Nll-py-8HB">

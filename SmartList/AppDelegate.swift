@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let navController = window!.rootViewController as! UINavigationController
 //        let mainViewController = navController.topViewController as! MainViewController
         // Override point for customization after application launch.
+        UINavigationBar.appearance().backgroundColor = UIColor.green
         return true
     }
 

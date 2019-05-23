@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9805F602295FFD40048ADCE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9805F5F2295FFD40048ADCE /* DetailViewController.swift */; };
 		D9C7FE282245AF6A00FF896A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C7FE272245AF6A00FF896A /* AppDelegate.swift */; };
 		D9C7FE2D2245AF6A00FF896A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9C7FE2B2245AF6A00FF896A /* Main.storyboard */; };
 		D9C7FE2F2245AF6C00FF896A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9C7FE2E2245AF6C00FF896A /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D9805F5F2295FFD40048ADCE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D9C7FE242245AF6A00FF896A /* SmartList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9C7FE272245AF6A00FF896A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9C7FE2C2245AF6A00FF896A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,8 +58,8 @@
 		D9C7FE262245AF6A00FF896A /* SmartList */ = {
 			isa = PBXGroup;
 			children = (
-				D9C7FE3F2245B79500FF896A /* View */,
 				D9C7FE3C2245B77B00FF896A /* Model */,
+				D9C7FE3F2245B79500FF896A /* View */,
 				D9C7FE3B2245B75F00FF896A /* Controllers */,
 				D9C7FE272245AF6A00FF896A /* AppDelegate.swift */,
 				D9C7FE2E2245AF6C00FF896A /* Assets.xcassets */,
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				D9C7FE422245BC1900FF896A /* MainViewController.swift */,
+				D9805F5F2295FFD40048ADCE /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				D9C7FE3A2245B6F700FF896A /* Item.swift in Sources */,
 				D9C7FE282245AF6A00FF896A /* AppDelegate.swift in Sources */,
 				D9C7FE432245BC1900FF896A /* MainViewController.swift in Sources */,
+				D9805F602295FFD40048ADCE /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

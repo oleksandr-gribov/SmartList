@@ -23,20 +23,58 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        //doneItems.append(Item("checking"))
         loadData()
         itemField.delegate = self
+        itemField.autocapitalizationType = UITextAutocapitalizationType.words
         self.navigationItem.title = "SmartList"
-//        
-//        tapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.doubleTappedCell(_:)))
-//        tableView.addGestureRecognizer(tapGesture)
-//        tapGesture!.delegate = self
-//       
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (MainViewController.doubleTappedCell(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.delaysTouchesBegan = true
+        tableView.addGestureRecognizer(doubleTapGesture)
+        tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
         
     }
-    func doubleTappedCell () {
-        
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Completed Items"
+        } else {
+            return nil
+        }
     }
+    @objc func doubleTappedCell (_ recognizer: UITapGestureRecognizer) {
+        
+        if recognizer.state == UITapGestureRecognizer.State.ended {
+            let tapLocation = recognizer.location(in: self.tableView)
+            if let indexPath = self.tableView.indexPathForRow(at: tapLocation){
+                let section = indexPath.section
+                if let tappedCell = self.tableView.cellForRow(at: indexPath) {
+                    if section == 0 {
+                        
+                        let itemTapped = allItems[indexPath.row]
+                    
+                        let insertIndexPath = IndexPath(row: 0, section: 1)
+                        doneItems.append(itemTapped)
+                        allItems.remove(at: indexPath.row)
+                        tableView.moveRow(at: indexPath, to: insertIndexPath)
+                    } else {
+                        let itemTapped = doneItems[indexPath.row]
+                        let insertIndexPath = IndexPath(row: 0, section: 0)
+                        allItems.append(itemTapped)
+                        doneItems.remove(at: indexPath.row)
+                        tableView.moveRow(at: indexPath, to: insertIndexPath)
+                    }
+                    tableView.reloadData()
+                }
+            }
+        }
+    }
+        
+    
     
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -44,17 +82,55 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Table View methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allItems.count
+        switch(section){
+        case 0:
+            return allItems.count
+        case 1:
+            return doneItems.count
+        default:
+            return allItems.count
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+           return 15
+        } else {
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let item = allItems[indexPath.row]
-        cell.textLabel?.text = item.name
+        let section = indexPath.section
+        switch section {
+        case 0:
+            let item = allItems[indexPath.row]
+            cell.textLabel?.text = item.name
+        case 1:
+            let item = doneItems[indexPath.row]
+            cell.textLabel?.text = item.name
+            //cell.textLabel?.textColor = UIColor.gray
+        default:
+            let item = allItems[indexPath.row]
+            cell.textLabel?.text = item.name
+        }
+        
+        
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
+    }
+    
+    // Editing rows 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        } else {
+            return false 
+        }
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if indexPath.row < allItems.count {
@@ -63,6 +139,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         saveChanges()
     }
+    
+   
     
     // MARK: - Actions
     
@@ -104,15 +182,37 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    /*
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "detailView" {
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let selectedItem = allItems[indexPath.row]
+                let destinationVC = segue.destination as! DetailViewController
+                destinationVC.item = selectedItem
+            }
+        }
+        
     }
-    */
+    @IBAction func unwindToMainViewController (_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? DetailViewController, let item = sourceViewController.item {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                allItems[selectedIndexPath.row] = item
+                tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+            } else {
+                let newIndexPath = IndexPath(row: allItems.count, section: 0)
+                allItems.append(item)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+        }
+    }
+    
 
 }
 extension MainViewController: UITextFieldDelegate {
