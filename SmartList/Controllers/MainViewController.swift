@@ -23,12 +23,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //doneItems.append(Item("checking"))
+
         loadData()
         itemField.delegate = self
         itemField.autocapitalizationType = UITextAutocapitalizationType.words
         self.navigationItem.title = "SmartList"
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+       
         
 
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (MainViewController.doubleTappedCell(_:)))
@@ -39,13 +39,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Do any additional setup after loading the view.
         
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Completed Items"
-        } else {
-            return nil
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let selectedRow : IndexPath? = tableView.indexPathForSelectedRow
+        if let selectedRowNotNil = selectedRow {
+            tableView.deselectRow(at: selectedRowNotNil, animated: true)
         }
     }
+    
     @objc func doubleTappedCell (_ recognizer: UITapGestureRecognizer) {
         
         if recognizer.state == UITapGestureRecognizer.State.ended {
@@ -69,6 +71,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         tableView.moveRow(at: indexPath, to: insertIndexPath)
                     }
                     tableView.reloadData()
+                    saveChanges()
                 }
             }
         }
@@ -94,7 +97,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-           return 15
+           return 0
         } else {
             return 0
         }
@@ -122,6 +125,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Completed Items"
+        } else {
+            return nil
+        }
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 0.7)
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = UIColor.white
+            headerView.textLabel?.textAlignment = .center
+        }
     }
     
     // Editing rows 
@@ -203,6 +220,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func unwindToMainViewController (_ sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DetailViewController, let item = sourceViewController.item {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndexPath, animated: true)
                 allItems[selectedIndexPath.row] = item
                 tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
             } else {

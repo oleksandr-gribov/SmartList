@@ -9,6 +9,10 @@
 import UIKit
 
 class Item: NSObject, NSCoding {
+    var name : String
+    var completed: Bool
+    var image: UIImage?
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.completed, forKey:"completed")
@@ -19,8 +23,7 @@ class Item: NSObject, NSCoding {
         completed = aDecoder.decodeBool(forKey: "completed")
     }
     
-    var name : String
-    var completed: Bool
+   
     
     init(_ name: String ) {
         self.name = name

@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController,UITextFieldDelegate {
     
+   
     var item: Item?
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -20,12 +21,16 @@ class DetailViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self as! UITextFieldDelegate
-      //  nameTextField.delegate = self as! UITextFieldDelegate
+   
         
         if let item = item {
             self.navigationItem.title = item.name
             nameTextField.text = item.name
+        } else {
+            // Testing code 
+            self.nameTextField.text = EdamamAPI.upcCode
         }
+        
        updateSaveButton()
         
         // Do any additional setup after loading the view.
