@@ -13,6 +13,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var tableView: UITableView!
     var allItems =  [Item]()
     var doneItems = [Item]()
+    var imageCache: ImageCache!
+    
+    
     let itemArchiveURL: URL = {
         let documentsDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = documentsDirectories.first!
@@ -178,7 +181,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func addingItem() {
         if let itemEntered = itemField?.text {
             if itemEntered.count > 0 {
-                let newItem = Item(itemEntered)
+                let newItem = Item(name: itemEntered)
                 allItems.append(newItem)
             }
           
@@ -213,6 +216,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let selectedItem = allItems[indexPath.row]
                 let destinationVC = segue.destination as! DetailViewController
                 destinationVC.item = selectedItem
+                destinationVC.imageCache = imageCache
             }
         }
         

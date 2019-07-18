@@ -12,7 +12,11 @@ import AVFoundation
 class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var video = AVCaptureVideoPreviewLayer()
     var session = AVCaptureSession()
+    var qrCodeFrameView: UIView?
    // @IBOutlet weak var square: UIImageView!
+    
+    // MARK: - View Life Cycle
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,31 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
        // session = AVCaptureSession()
         
         // Define capture device
+        qrCodeFrameView = UIView()
+        
+        setupSession()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        session.stopRunning()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        session.startRunning()
+    }
+   
+    
+    // MARK: - AVCapture methods
+    fileprivate func setupSession() {
+        if let qrCodeFrameView = qrCodeFrameView {
+            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            qrCodeFrameView.layer.borderWidth = 2
+            //            qrCodeFrameView.frame = CGRect(x: 150, y: 150, width: self.view.frame.width/2, height: self.view.frame.height/2)
+            //            qrCodeFrameView.center.x = view.center.x
+            //            qrCodeFrameView.center.y = view.center.y
+            view.addSubview(qrCodeFrameView)
+            view.bringSubviewToFront(qrCodeFrameView)
+        }
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)!
         
         do {
@@ -46,25 +75,27 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         //self.view.bringSubviewToFront(square)
         session.startRunning()
     }
-   
-    func navigateToDetail(decodedString: String) {
-        EdamamAPI.upcCode = decodedString
-        performSegue(withIdentifier: "upcSegue", sender: self)
-    }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if metadataObjects != nil && metadataObjects.count != 0 {
             if let object = metadataObjects[0] as? AVMetadataMachineReadableCodeObject {
                 if object.type == .ean8 || object.type == .ean13 || object.type == .pdf417 {
+                    qrCodeFrameView?.frame = object.bounds
                     if let decodedString = object.stringValue {
                         self.navigateToDetail(decodedString: decodedString)
-                        session.stopRunning()
+                        //session.stopRunning()
                     }
                 }
             }
         }
         
         
+    }
+    
+    // MARK: - Actions
+    func navigateToDetail(decodedString: String) {
+        EdamamAPI.upcCode = decodedString
+        performSegue(withIdentifier: "upcSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

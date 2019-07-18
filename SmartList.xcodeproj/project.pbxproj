@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D90AA1D422DF81DC00D71D0D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90AA1D322DF81DC00D71D0D /* ImageCache.swift */; };
 		D9805F602295FFD40048ADCE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9805F5F2295FFD40048ADCE /* DetailViewController.swift */; };
 		D9AA8115229B530A003D4EDE /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA8114229B530A003D4EDE /* BarcodeScannerViewController.swift */; };
 		D9C0C78922DE8D9E0048599B /* sq.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C0C78822DE8D9E0048599B /* sq.png */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D90AA1D322DF81DC00D71D0D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		D9805F5F2295FFD40048ADCE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D9AA8114229B530A003D4EDE /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		D9C0C78822DE8D9E0048599B /* sq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sq.png; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9ABAE5222DFE6E2002D1464 /* Helper  */ = {
+			isa = PBXGroup;
+			children = (
+				D9C0C78A22DE906E0048599B /* EdamamAPI.swift */,
+			);
+			path = "Helper ";
+			sourceTree = "<group>";
+		};
 		D9C7FE1B2245AF6900FF896A = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		D9C7FE262245AF6A00FF896A /* SmartList */ = {
 			isa = PBXGroup;
 			children = (
+				D9ABAE5222DFE6E2002D1464 /* Helper  */,
 				D9C7FE3C2245B77B00FF896A /* Model */,
 				D9C7FE3F2245B79500FF896A /* View */,
 				D9C7FE3B2245B75F00FF896A /* Controllers */,
@@ -72,7 +83,6 @@
 				D9C0C78822DE8D9E0048599B /* sq.png */,
 				D9C7FE302245AF6C00FF896A /* LaunchScreen.storyboard */,
 				D9C7FE332245AF6C00FF896A /* Info.plist */,
-				D9C0C78A22DE906E0048599B /* EdamamAPI.swift */,
 			);
 			path = SmartList;
 			sourceTree = "<group>";
@@ -91,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				D9C7FE392245B6F700FF896A /* Item.swift */,
+				D90AA1D322DF81DC00D71D0D /* ImageCache.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +191,7 @@
 				D9C7FE282245AF6A00FF896A /* AppDelegate.swift in Sources */,
 				D9C7FE432245BC1900FF896A /* MainViewController.swift in Sources */,
 				D9805F602295FFD40048ADCE /* DetailViewController.swift in Sources */,
+				D90AA1D422DF81DC00D71D0D /* ImageCache.swift in Sources */,
 				D9C0C78B22DE906E0048599B /* EdamamAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

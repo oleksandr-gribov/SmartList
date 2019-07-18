@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-Zy-fFf">
-                                <rect key="frame" x="10" y="89" width="355" height="58.5"/>
+                                <rect key="frame" x="10" y="89" width="355" height="386.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJp-PV-39w">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="20.5"/>
@@ -151,6 +151,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="320" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="XzI-4a-jD8">
+                                        <rect key="frame" x="0.0" y="66.5" width="355" height="320"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="XzI-4a-jD8" secondAttribute="height" multiplier="71:64" id="OnH-0X-aa6"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZo-wW-SrS" appends="YES" id="QHI-YO-as5"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -170,6 +180,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="XzI-4a-jD8" id="pJ5-Yp-hys"/>
                         <outlet property="nameLabel" destination="KJp-PV-39w" id="FQd-MX-KKk"/>
                         <outlet property="nameTextField" destination="27Q-o0-xEf" id="3OQ-vh-PEK"/>
                         <outlet property="saveButton" destination="SXj-z0-sQO" id="djJ-66-vSI"/>
@@ -177,6 +188,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bzk-2o-hEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="NRS-4R-pGE" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="JZo-wW-SrS">
+                    <connections>
+                        <action selector="selectImageFromPhotoLibrary:" destination="DzY-xH-SiH" id="Pfy-LR-ctg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4474" y="-358"/>
         </scene>
@@ -202,6 +218,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image" width="540" height="540"/>
         <image name="barcode" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
