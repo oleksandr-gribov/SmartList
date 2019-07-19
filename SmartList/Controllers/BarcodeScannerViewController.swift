@@ -13,6 +13,7 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
     var video = AVCaptureVideoPreviewLayer()
     var session = AVCaptureSession()
     var qrCodeFrameView: UIView?
+    var imageCache: ImageCache!
    // @IBOutlet weak var square: UIImageView!
     
     // MARK: - View Life Cycle
@@ -102,7 +103,7 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         switch (segue.identifier) {
         case "upcSegue" :
             let destinationVC = segue.destination as! DetailViewController
-            
+            destinationVC.imageCache = imageCache
             
         default:
             preconditionFailure("Unexpected segue identifier")

@@ -13,7 +13,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
    
     var item: Item?
     var imageCache: ImageCache!
-    var image: UIImage?
+    var baseImage: UIImage?
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,10 +24,12 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
         super.viewDidLoad()
         nameTextField.delegate = self as! UITextFieldDelegate
    
-        
+        self.navigationItem.title = "Details"
         if let item = item {
-            self.navigationItem.title = item.name
+           // self.navigationItem.title = item.name
+            
             nameTextField.text = item.name
+            imageView.image = imageCache.getImage(forKey: item.uID)
         } else {
             // Testing code
             //self.nameTextField.text = EdamamAPI.upcCode
@@ -39,6 +41,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                     } else {
                         DispatchQueue.main.async {
                             self.nameTextField.text = item.name
+                            self.baseImage = UIImage(imageLiteralResourceName: "Image")
                         }
                     }
                 } else {
@@ -50,6 +53,9 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
        updateSaveButton()
         
         // Do any additional setup after loading the view.
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+       
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -72,12 +78,15 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        let destVC = segue.destination as! MainViewController
-        
-        let name = nameTextField.text ?? ""
+       if let photo = imageView.image ,
+        let name = nameTextField.text {
         item = Item(name: name)
+        guard let uid = item?.uID else {
+            return
+        }
+        imageCache.setImage(photo, forKey: uid)
         
-        //imageCache.setImage(imageView.image, forKey: item.uID)
+    }
     }
     
     private func updateSaveButton() {
@@ -114,6 +123,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
          let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
        // imageCache.setImage(selectedImage, forKey: item?.uID)
+        
         // Set photoImageView to dispay the selected image.
         imageView.image = selectedImage
         
@@ -135,6 +145,7 @@ class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerC
                         self.imageView.image = image
                         self.nameTextField.text = item.name
                         self.saveButton.isEnabled = true
+                        self.baseImage = image
                     }
                 }
             })

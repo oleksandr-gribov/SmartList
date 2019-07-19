@@ -57,7 +57,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ty0-2K-FWv" appends="YES" id="YL5-X5-Gch"/>
                                             <segue destination="DzY-xH-SiH" kind="show" identifier="detailView" id="9yX-Sx-JTV"/>
                                         </connections>
                                     </tableViewCell>
@@ -73,7 +75,7 @@
                                     <color key="titleColor" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="GCH-Bb-KnU" kind="show" id="exg-3S-AgL"/>
+                                    <segue destination="GCH-Bb-KnU" kind="show" identifier="barcodeSegue" id="exg-3S-AgL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -107,6 +109,7 @@
                         <action selector="backgroundTapped:" destination="mAM-87-woE" id="r76-PB-yYC"/>
                     </connections>
                 </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ty0-2K-FWv"/>
             </objects>
             <point key="canvasLocation" x="2660" y="-173.16341829085459"/>
         </scene>
@@ -175,7 +178,7 @@
                     <navigationItem key="navigationItem" id="HFY-h0-8KP">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SXj-z0-sQO">
                             <connections>
-                                <segue destination="NRS-4R-pGE" kind="unwind" unwindAction="unwindToMainViewController:" id="U6q-9C-MAw"/>
+                                <segue destination="NRS-4R-pGE" kind="unwind" unwindAction="unwindToMainViewController:" id="HtN-nA-Zsy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -194,7 +197,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4474" y="-358"/>
+            <point key="canvasLocation" x="4758" y="-173"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Nll-py-8HB">
@@ -222,6 +225,6 @@
         <image name="barcode" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qyr-2C-Wfk"/>
+        <segue reference="9yX-Sx-JTV"/>
     </inferredMetricsTieBreakers>
 </document>

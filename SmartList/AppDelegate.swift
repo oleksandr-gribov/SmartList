@@ -22,8 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let imageCache = ImageCache()
         let rootViewController = window?.rootViewController as! UINavigationController
+        rootViewController.navigationBar.prefersLargeTitles = true
         let mainViewController = rootViewController.topViewController as! MainViewController
         mainViewController.imageCache = imageCache
+        
         return true
     }
 
