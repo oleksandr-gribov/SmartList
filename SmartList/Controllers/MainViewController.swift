@@ -27,7 +27,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         loadData()
         itemField.delegate = self
         itemField.autocapitalizationType = UITextAutocapitalizationType.words
