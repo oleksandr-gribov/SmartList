@@ -19,8 +19,7 @@ struct EdamamAPI {
             listURLComponents.scheme = "https"
             listURLComponents.host = "api.edamam.com"
             listURLComponents.path = "/api/food-database/parser"
-            
-            
+
             var mQueries = [
                 "upc": "\(upcCode)",
                 "app_id": "7d6d071a",

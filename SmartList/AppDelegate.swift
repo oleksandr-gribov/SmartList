@@ -15,22 +15,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        let navController = window!.rootViewController as! UINavigationController
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let navController =  UINavigationController(rootViewController: AllListsTableViewController())
+    
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
 //        let mainViewController = navController.topViewController as! MainViewController
         // Override point for customization after application launch.
-        UINavigationBar.appearance().backgroundColor = UIColor.green
+        //UINavigationBar.appearance().backgroundColor = UIColor.green
         //
-        
-     
-        
-        let imageCache = ImageCache()
-        let rootViewController = window?.rootViewController as! UINavigationController
-        rootViewController.navigationBar.prefersLargeTitles = true
-        let mainViewController = rootViewController.topViewController as! MainViewController
-        mainViewController.imageCache = imageCache
-        
-       
-        
+        navController.hidesBarsOnSwipe = false
+        navController.hidesBarsOnTap = false
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.backgroundImage = UIImage(named: "Bounds")
+            navController.navigationBar.prefersLargeTitles = true 
+            
+            navController.navigationBar.standardAppearance = navBarAppearance
+            navController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
         return true
     }
 

@@ -28,9 +28,9 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
        // session = AVCaptureSession()
         
         // Define capture device
-        qrCodeFrameView = UIView()
+        //qrCodeFrameView = UIView()
         
-        setupSession()
+        //setupSession()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -98,17 +98,7 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         EdamamAPI.upcCode = decodedString
         performSegue(withIdentifier: "upcSegue", sender: self)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch (segue.identifier) {
-        case "upcSegue" :
-            let destinationVC = segue.destination as! DetailViewController
-            destinationVC.imageCache = imageCache
-            
-        default:
-            preconditionFailure("Unexpected segue identifier")
-        }
-    }
+ 
 
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController,UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ItemViewController: UIViewController,UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
    
     var item: Item?

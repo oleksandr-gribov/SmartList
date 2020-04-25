@@ -32,9 +32,7 @@ class Item: NSObject, NSCoding {
         imageKey = aDecoder.decodeObject(forKey: "imageKey") as? String ?? nil
        
     }
-    
-   
-    
+
     init( name: String ) {
         self.name = name
         self.completed = false
@@ -52,6 +50,4 @@ extension Item: Comparable {
             return true
         }
     }
-    
-    
 }
