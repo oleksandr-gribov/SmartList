@@ -14,6 +14,8 @@ class Item: NSObject, NSCoding {
     var uID: String
     var imageURL: URL?
     var imageKey: String?
+    var previousPosition: Int?
+    var currentPosition: Int?
     
     
     func encode(with aCoder: NSCoder) {
@@ -31,6 +33,10 @@ class Item: NSObject, NSCoding {
         uID = aDecoder.decodeObject(forKey: "uID") as? String ?? UUID().uuidString
         imageKey = aDecoder.decodeObject(forKey: "imageKey") as? String ?? nil
        
+    }
+    
+    func changePosition() {
+        
     }
 
     init( name: String ) {

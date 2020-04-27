@@ -60,23 +60,21 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareListTapped))
         self.navigationItem.rightBarButtonItem?.tintColor = .white
         
-        //self.tableView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: -5)
         
         loadData()
         listView.textField.delegate = self
         listView.textField.autocapitalizationType = UITextAutocapitalizationType.words
         self.navigationItem.title = "SimpleList"
+        
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: listCellIdentifier)
+        tableView.keyboardDismissMode = .onDrag
+        
 
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector (DetailListViewContoller.doubleTappedCell(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
         doubleTapGesture.delaysTouchesBegan = true
-        
-
-        
-        
+ 
         tableView.addGestureRecognizer(doubleTapGesture)
         tableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
@@ -84,7 +82,9 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
         navigationItem.backBarButtonItem = UIBarButtonItem(title: self.navigationItem.title, style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .white
         
+        
     }
+    
     @objc func shareListTapped() {
         
     }
@@ -107,12 +107,22 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
                     let item = testItems[indexPath.section]
                     item.completed = !item.completed
                     toggleCheckbox(tappedCell, isCompleted: item.completed)
-                    testItems.sort()
-                    tableView.reloadData()
+                    moveItemInTableView(item, from: indexPath)
                     saveChanges()
                 }
             }
         }
+    }
+
+    func moveItemInTableView(_ item: Item,  from: IndexPath) {
+        testItems.sort()
+        guard let  newPosition = testItems.index(of: item) else {
+            print("didnt find item in array")
+            return
+        }
+        let newIndexPath = IndexPath(row: 0, section: newPosition)
+        tableView.moveSection(from.section, toSection: newIndexPath.section)
+        
     }
     
   
@@ -163,9 +173,6 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        if testItems.count < 8 {
-            return 20
-        }
         return testItems.count
         
     }
@@ -192,14 +199,15 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
     
     // Editing rows
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if indexPath.section < allItems.count {
-            allItems.remove(at: indexPath.section)
-            tableView.deleteRows(at: [indexPath], with: .top)
+        if indexPath.section < testItems.count {
+            testItems.remove(at: indexPath.section)
+            tableView.deleteSections([indexPath.section], with: .top)
+            saveChanges()
         }
-        saveChanges()
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = allItems[indexPath.section]
+        let item = testItems[indexPath.section]
         let vc = ItemViewController()
         vc.item = item
         self.navigationController?.pushViewController(vc, animated: true)
@@ -216,7 +224,7 @@ class DetailListViewContoller: UIViewController, UITableViewDataSource, UITableV
     }
     public func saveChanges() {
         print ("Saving items to: \(itemArchiveURL.path)")
-        NSKeyedArchiver.archiveRootObject(allItems, toFile: itemArchiveURL.path)
+        NSKeyedArchiver.archiveRootObject(testItems, toFile: itemArchiveURL.path)
     }
     func loadData() {
         if let savedData = NSKeyedUnarchiver.unarchiveObject(withFile: itemArchiveURL.path) as? [Item] {

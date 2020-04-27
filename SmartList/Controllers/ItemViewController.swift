@@ -10,10 +10,10 @@ import UIKit
 
 class ItemViewController: UIViewController,UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-   
     var item: Item?
     var imageCache: ImageCache!
     var baseImage: UIImage?
+    var itemView: ItemView!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
@@ -22,37 +22,52 @@ class ItemViewController: UIViewController,UITextFieldDelegate, UIImagePickerCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.delegate = self as! UITextFieldDelegate
-   
-        self.navigationItem.title = "Details"
-        if let item = item {
-           // self.navigationItem.title = item.name
-            
-            nameTextField.text = item.name
-            imageView.image = imageCache.getImage(forKey: item.uID)
-        } else {
-            // Testing code
-            //self.nameTextField.text = EdamamAPI.upcCode
-            EdamamAPI.fetchProductData { (item) in
-                if let item = item {
-                    print("Successfuly decoded \(item.name) from JSON")
-                    if let url = item.imageURL {
-                        self.fetchPhoto(with: item)
-                    } else {
-                        DispatchQueue.main.async {
-                            self.nameTextField.text = item.name
-                            self.baseImage = UIImage(imageLiteralResourceName: "Image")
-                        }
-                    }
-                } else {
-                    print ("Couldnt fetch product data")
-                }
-            }
-        }
         
-       updateSaveButton()
+        setupView()
+        
+//
+//        self.navigationItem.title = "Details"
+//        if let item = item {
+//           // self.navigationItem.title = item.name
+//
+//            nameTextField.text = item.name
+//            imageView.image = imageCache.getImage(forKey: item.uID)
+//        } else {
+//            // Testing code
+//            //self.nameTextField.text = EdamamAPI.upcCode
+//            EdamamAPI.fetchProductData { (item) in
+//                if let item = item {
+//                    print("Successfuly decoded \(item.name) from JSON")
+//                    if let url = item.imageURL {
+//                        self.fetchPhoto(with: item)
+//                    } else {
+//                        DispatchQueue.main.async {
+//                            self.nameTextField.text = item.name
+//                            self.baseImage = UIImage(imageLiteralResourceName: "Image")
+//                        }
+//                    }
+//                } else {
+//                    print ("Couldnt fetch product data")
+//                }
+//            }
+//        }
+//
+      // updateSaveButton()
         
         // Do any additional setup after loading the view.
+    }
+    func setupView() {
+        let mainView = ItemView()
+        self.itemView = mainView
+        view.addSubview(itemView)
+        self.navigationItem.title = item!.name
+        
+        itemView.setConstraints(top: view.topAnchor, paddingTop: topbarHeight, bottom: view.bottomAnchor, paddingBottom: 0, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 0, width: 0)
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        
+        view.addGestureRecognizer(tap)
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
        
@@ -110,7 +125,7 @@ class ItemViewController: UIViewController,UITextFieldDelegate, UIImagePickerCon
         present(imagePickerController,animated: true, completion: nil)
     }
     
-    // MARK: - Image Pikcer methods
+    // MARK: - Image Picker methods
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
         // Dismiss the picker if the user has cancelled

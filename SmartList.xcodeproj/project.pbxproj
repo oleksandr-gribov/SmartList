@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D90AA1D422DF81DC00D71D0D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90AA1D322DF81DC00D71D0D /* ImageCache.swift */; };
+		D93E74162456E45B00F23B41 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E74152456E45B00F23B41 /* ItemView.swift */; };
+		D93E7419245703FE00F23B41 /* IUTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93E7418245703FE00F23B41 /* IUTextField+Extension.swift */; };
+		D95380B324542C680015713E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95380B224542C680015713E /* UIView+Extension.swift */; };
 		D95465D22451EBC300EE0462 /* AllListsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95465D12451EBC300EE0462 /* AllListsTableViewController.swift */; };
 		D96D95032452BE23006C1A68 /* AllListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96D95022452BE23006C1A68 /* AllListsTableViewCell.swift */; };
 		D96D95052452D634006C1A68 /* DetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96D95042452D634006C1A68 /* DetailListView.swift */; };
@@ -26,6 +29,9 @@
 
 /* Begin PBXFileReference section */
 		D90AA1D322DF81DC00D71D0D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		D93E74152456E45B00F23B41 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		D93E7418245703FE00F23B41 /* IUTextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IUTextField+Extension.swift"; sourceTree = "<group>"; };
+		D95380B224542C680015713E /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		D95465D12451EBC300EE0462 /* AllListsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsTableViewController.swift; sourceTree = "<group>"; };
 		D96D95022452BE23006C1A68 /* AllListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsTableViewCell.swift; sourceTree = "<group>"; };
 		D96D95042452D634006C1A68 /* DetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListView.swift; sourceTree = "<group>"; };
@@ -55,10 +61,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D93E7417245703E200F23B41 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D95380B224542C680015713E /* UIView+Extension.swift */,
+				D93E7418245703FE00F23B41 /* IUTextField+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		D9ABAE5222DFE6E2002D1464 /* Helper  */ = {
 			isa = PBXGroup;
 			children = (
 				D9C0C78A22DE906E0048599B /* EdamamAPI.swift */,
+				D90AA1D322DF81DC00D71D0D /* ImageCache.swift */,
 			);
 			path = "Helper ";
 			sourceTree = "<group>";
@@ -82,6 +98,7 @@
 		D9C7FE262245AF6A00FF896A /* SmartList */ = {
 			isa = PBXGroup;
 			children = (
+				D93E7417245703E200F23B41 /* Extensions */,
 				D9ABAE5222DFE6E2002D1464 /* Helper  */,
 				D9C7FE3C2245B77B00FF896A /* Model */,
 				D9C7FE3F2245B79500FF896A /* View */,
@@ -110,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				D9C7FE392245B6F700FF896A /* Item.swift */,
-				D90AA1D322DF81DC00D71D0D /* ImageCache.swift */,
 				D97FF8D92452ED6A00B71F03 /* List.swift */,
 			);
 			path = Model;
@@ -122,6 +138,7 @@
 				D96D95022452BE23006C1A68 /* AllListsTableViewCell.swift */,
 				D96D95042452D634006C1A68 /* DetailListView.swift */,
 				D97FF8DB245338B300B71F03 /* DetailListTableViewCell.swift */,
+				D93E74152456E45B00F23B41 /* ItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9AA8115229B530A003D4EDE /* BarcodeScannerViewController.swift in Sources */,
+				D95380B324542C680015713E /* UIView+Extension.swift in Sources */,
+				D93E7419245703FE00F23B41 /* IUTextField+Extension.swift in Sources */,
 				D95465D22451EBC300EE0462 /* AllListsTableViewController.swift in Sources */,
 				D9C7FE3A2245B6F700FF896A /* Item.swift in Sources */,
 				D9C7FE282245AF6A00FF896A /* AppDelegate.swift in Sources */,
@@ -207,6 +226,7 @@
 				D96D95032452BE23006C1A68 /* AllListsTableViewCell.swift in Sources */,
 				D9805F602295FFD40048ADCE /* ItemViewController.swift in Sources */,
 				D90AA1D422DF81DC00D71D0D /* ImageCache.swift in Sources */,
+				D93E74162456E45B00F23B41 /* ItemView.swift in Sources */,
 				D97FF8DC245338B300B71F03 /* DetailListTableViewCell.swift in Sources */,
 				D9C0C78B22DE906E0048599B /* EdamamAPI.swift in Sources */,
 			);

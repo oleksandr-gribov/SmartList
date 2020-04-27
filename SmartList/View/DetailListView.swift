@@ -80,12 +80,4 @@ class DetailListView: UIView {
     
 }
 
-extension UITextField {
-    func addBottomLine(_ color: UIColor) {
-        var bottomLine = UIView()
-        
-        bottomLine.backgroundColor = color
-        self.addSubview(bottomLine)
-        bottomLine.setConstraints(top: nil, paddingTop: 0, bottom: self.bottomAnchor, paddingBottom: 1, right: self.rightAnchor, paddingRight: 0, left: self.leftAnchor, paddingLeft: 0, height: 3, width: 0)
-    }
-}
+
